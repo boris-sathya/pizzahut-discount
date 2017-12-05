@@ -1,3 +1,4 @@
+import argparse
 import requests
 from bs4 import BeautifulSoup
 from data import answers as data
@@ -15,19 +16,19 @@ headers = {
 # use user input to start the survey
 def getUserInput():
     date = raw_input("Date of your visit YYMMDD:")
-    time = raw_input("Time of your visit HH:MM:")
+    time = raw_input("Time of your visit HHMM:")
     restaurantNumber = raw_input("Restaurant Number:")
     receiptNumber = raw_input("Receipt Number:")
 
-    data[0][2] = restaurantNumber
-    data[0][8] = receiptNumber
+    data[0][2] = ('InputStoreNum', restaurantNumber)
+    data[0][8] = ('InputTransactionNum', receiptNumber)
 
-    data[0][5] = date[:2]
-    data[0][4] = date[2:4]
-    data[0][3] = date[4:6]
+    data[0][5] = ('InputYear', date[:2])
+    data[0][4] = ('InputMonth', date[2:4])
+    data[0][3] = ('InputDay', date[4:6])
 
-    data[0][6] = time[:2]
-    data[0][7] = time[2:4]
+    data[0][6] = ('InputHour', time[:2])
+    data[0][7] = ('InputMinute', time[2:4])
 
 def getNextForm(responseData):
     parsedText = BeautifulSoup(responseData, "lxml")
@@ -44,6 +45,10 @@ def getValCode(responseData):
     return action.text
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-g', help = 'God mode. Fetch Coupons without a receipt', action='store_true')
+    args = parser.parse_args()
+
     r = requests.Session()
     r = requests.get('http://www.phfeedbackswe.com/')
     soup = BeautifulSoup(r.content, "lxml")
@@ -52,9 +57,14 @@ def main():
     action = soup.find('form', id='surveyEntryForm').get('action')
     fullUrl = baseUrl + action
 
+    # default option: get previous receipt data from the user
+    # god mode: replay fudged data since receipt number is not validated
+    if (not args.g):
+        getUserInput()
     # start the survey and iterate through all the forms
+    print(data[0])
     for item in range(len(data)):
-        print "Form Number: %d -- URL: %s" % (item, fullUrl) 
+        print "Submitting Form: %d -- URL: %s" % (item, fullUrl)
         response = postRequest(fullUrl, r.cookies, data[item])
         if (item == 15):
             # all done. fetch "ValCode" from the response
@@ -64,4 +74,4 @@ def main():
 
 
 if __name__ == "__main__":
-     main()
+    main()

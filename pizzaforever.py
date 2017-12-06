@@ -62,7 +62,6 @@ def main():
     if (not args.g):
         getUserInput()
     # start the survey and iterate through all the forms
-    print(data[0])
     for item in range(len(data)):
         print "Submitting Form: %d -- URL: %s" % (item, fullUrl)
         response = postRequest(fullUrl, r.cookies, data[item])

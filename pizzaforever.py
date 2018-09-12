@@ -65,7 +65,7 @@ def main():
     for item in range(len(data)):
         print "Submitting Form: %d -- URL: %s" % (item, fullUrl)
         response = postRequest(fullUrl, r.cookies, data[item])
-        if (item == 15):
+        if (item == 10):
             # all done. fetch "ValCode" from the response
             print(getValCode(response))
         else:

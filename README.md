@@ -33,14 +33,9 @@ Submitting Form: 7 -- URL: https://u.pizzahutsurvey.com/Survey.aspx?c=403703
 Submitting Form: 8 -- URL: https://u.pizzahutsurvey.com/Survey.aspx?c=413703
 Submitting Form: 9 -- URL: https://u.pizzahutsurvey.com/Survey.aspx?c=413703
 Submitting Form: 10 -- URL: https://u.pizzahutsurvey.com/Survey.aspx?c=423703
-Submitting Form: 11 -- URL: https://u.pizzahutsurvey.com/Survey.aspx?c=423703
-Submitting Form: 12 -- URL: https://u.pizzahutsurvey.com/Survey.aspx?c=433703
-Submitting Form: 13 -- URL: https://u.pizzahutsurvey.com/Survey.aspx?c=433703
-Submitting Form: 14 -- URL: https://u.pizzahutsurvey.com/Survey.aspx?c=443703
-Submitting Form: 15 -- URL: https://u.pizzahutsurvey.com/Survey.aspx?c=443703
 Valideringskod: 80442
 ``` 
 ## God Mode
 It happens that the webapplication doesn't actually validate the receipt number, so it is possible to generate discount coupons
-without a valid receipt (and its associated data) and social engineer your way in or write down the *gode mode* generated coupon code 
+without a valid receipt (and its associated data) and social engineer your way in or write down the *god mode* generated coupon code 
 on a previously expired receipt.
